@@ -19,8 +19,8 @@ you may build and install it into your local Maven repository by using the follo
 
 ```bash
 git clone git@github.com:marandus/argument-validator.git
-cd pci-ids
-git checkout pci-ids-0.3
+cd argument-validator
+git checkout argument-validator-0.1
 mvn install
 ```
 
@@ -89,7 +89,7 @@ implement one or more of the interfaces `CollectionArgumentValidator`, `ObjectAr
 and `StringArgumentValidator`. Then provide instances of you class to the constructor of the
 `ArgumentValidatorBean` and it will use yours instead of the reference implementations.
 
-*Please note:* Custom implementations cannot be used with the `ArgumentValidator` static-only
+**Please note:** Custom implementations cannot be used with the `ArgumentValidator` static-only
 approach. Since the dependency on the `ArgumentValidatorBean` is initialized in static context, it
 is not possible to pass your custom implementations.
 

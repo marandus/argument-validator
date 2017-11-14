@@ -27,9 +27,9 @@ public interface StringArgumentValidator {
 
     /**
      * Test {@code arg} to be non-blank as defined by the
-     * {@link StringUtils#isBlank(java.lang.CharSequence) StringUtils.isBlank()} method. If
-     * {@code arg} is blank, an IllegalArgumentException will be raised. The exception message will
-     * be constructed as follows:
+     * {@code StringUtils#isBlank(java.lang.CharSequence)} method. If {@code arg} is blank, an
+     * IllegalArgumentException will be raised. The exception message will be constructed as
+     * follows:
      * <p>
      * <tt>msg + ": " + arg</tt>
      *

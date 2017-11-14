@@ -65,6 +65,10 @@ public class StringArgumentValidatorImpl implements StringArgumentValidator {
      */
     @Override
     public void requireStringLength(final String arg, final int len, final NumberCompareOperator comp, final String name) {
+        if(len < 0) {
+            throw new IllegalArgumentException("Negative requireStringLength() length parameter");
+        }
+
         if(len == 0 && comp == NumberCompareOperator.EQUAL) {
             log.warn("Called requireStringLength() with length=0 and operator=EQUAL. You should use requireNonBlank() instead.");
         }

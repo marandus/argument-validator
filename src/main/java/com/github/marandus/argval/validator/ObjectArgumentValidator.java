@@ -24,10 +24,9 @@ package com.github.marandus.argval.validator;
 public interface ObjectArgumentValidator {
 
     /**
-     * Test {@code arg} to be non-null as defined by the
-     * {@link Objects#isNull(java.lang.Object) Objects.isNull()} method. If {@code arg} is null, an
-     * IllegalArgumentException will be raised. The exception message will be constructed as
-     * follows:
+     * Test {@code arg} to be non-null as defined by the {@code Objects#isNull(java.lang.Object)}
+     * method. If {@code arg} is null, an IllegalArgumentException will be raised. The exception
+     * message will be constructed as follows:
      * <p>
      * <tt>"NULL: " + msg</tt>
      *

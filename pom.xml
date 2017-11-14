@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.marandus</groupId>
     <artifactId>argument-validator</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1</version>
     <packaging>jar</packaging>
 
     <name>argument-validator</name>
@@ -31,7 +31,7 @@
         <connection>scm:git:git@github.com:marandus/argument-validator.git</connection>
         <developerConnection>scm:git:git@github.com:marandus/argument-validator.git</developerConnection>
         <url>https://github.com/marandus/argument-validator</url>
-        <tag>HEAD</tag>
+        <tag>argument-validator-0.1</tag>
     </scm>
 
     <distributionManagement>

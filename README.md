@@ -23,6 +23,9 @@ cd argument-validator
 git checkout argument-validator-0.2
 mvn install
 ```
+## API Documentation
+
+Javadocs are available on Github Pages: [apidocs](https://marandus.github.io/argument-validator/apidocs/)
 
 ## Usage
 

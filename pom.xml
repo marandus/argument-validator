@@ -4,7 +4,7 @@
     
     <groupId>com.github.marandus</groupId>
     <artifactId>argument-validator</artifactId>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.2</version>
     <packaging>jar</packaging>
 
     <name>argument-validator</name>
@@ -32,7 +32,7 @@
         <connection>scm:git:git@github.com:marandus/argument-validator.git</connection>
         <developerConnection>scm:git:git@github.com:marandus/argument-validator.git</developerConnection>
         <url>https://github.com/marandus/argument-validator</url>
-        <tag>HEAD</tag>
+        <tag>argument-validator-0.2</tag>
     </scm>
 
     <distributionManagement>

@@ -15,6 +15,7 @@
  */
 package com.github.marandus.argval.validator;
 
+import com.github.marandus.argval.enums.NumberCompareOperator;
 import java.util.Collection;
 import java.util.Map;
 
@@ -35,7 +36,10 @@ public interface CollectionArgumentValidator {
      *
      * @param arg Argument to test
      * @param msg Message used to construct the exception message
+     *
      * @throws IllegalArgumentException if specified argument is empty or null
+     *
+     * @since 0.1
      */
     public void requireNonEmpty(final Collection<?> arg, final String msg);
 
@@ -48,7 +52,50 @@ public interface CollectionArgumentValidator {
      *
      * @param arg Argument to test
      * @param msg Message used to construct the exception message
+     *
      * @throws IllegalArgumentException if specified argument is empty or null
+     *
+     * @since 0.1
      */
     public void requireNonEmpty(final Map<?, ?> arg, final String msg);
+
+    /**
+     * Test the size of {@code arg}, as defined by {@code Collection.size()}, against the provided
+     * length using the specified compare operator. If the result of the comparison is false, an
+     * IllegalArgumentException will be raised. The exception message will be constructed as
+     * follows:
+     * <p>
+     * <tt>"Collection size violation (" + name + "): Collection(" + arg.size() + ") " +
+     * comp.getOperator() + " " + len</tt>
+     *
+     * @param arg Collection to test
+     * @param len Value to be used as reference in comparison
+     * @param comp Comparison operator to be used
+     * @param name Name to be referenced in exception message
+     *
+     * @throws IllegalArgumentException if specified argument does not match length requirements
+     *
+     * @since 0.2
+     */
+    public void requireLength(final Collection<?> arg, final int len, final NumberCompareOperator comp, final String name);
+
+    /**
+     * Test the size of {@code arg}, as defined by {@code Map.size()}, against the provided length
+     * using the specified compare operator. If the result of the comparison is false, an
+     * IllegalArgumentException will be raised. The exception message will be constructed as
+     * follows:
+     * <p>
+     * <tt>"Map size violation (" + name + "): Map(" + arg.size() + ") " + comp.getOperator() + " "
+     * + len</tt>
+     *
+     * @param arg Map to test
+     * @param len Value to be used as reference in comparison
+     * @param comp Comparison operator to be used
+     * @param name Name to be referenced in exception message
+     *
+     * @throws IllegalArgumentException if specified argument does not match length requirements
+     *
+     * @since 0.2
+     */
+    public void requireLength(final Map<?, ?> arg, final int len, final NumberCompareOperator comp, final String name);
 }

@@ -34,6 +34,8 @@ public interface ObjectArgumentValidator {
      * @param msg Message used to construct the exception message
      *
      * @throws IllegalArgumentException if specified argument is null
+     *
+     * @since 0.1
      */
     public void requireNonNull(final Object arg, final String msg);
 }

@@ -73,188 +73,147 @@ public class StringArgumentValidatorImplTest {
     }
 
     @Test
-    public void testRequireStringLength_NULL() {
+    public void testRequireLength_NULL() {
         final String test = null;
 
         try {
             final StringArgumentValidatorImpl instance = new StringArgumentValidatorImpl();
-            instance.requireStringLength(test, 4, NumberCompareOperator.EQUAL, "Some message");
+            instance.requireLength(test, 4, NumberCompareOperator.EQUAL, "Some message");
         }
         catch (IllegalArgumentException ex) {
-            assertEquals("NULL: requireStringLength() parameter", ex.getMessage());
+            assertEquals("NULL: requireLength() parameter", ex.getMessage());
         }
     }
 
     @Test
-    public void testRequireStringLength_NEGLEN() {
+    public void testRequireLength_NEGLEN() {
         final String test = "0123";
 
         try {
             final StringArgumentValidatorImpl instance = new StringArgumentValidatorImpl();
-            instance.requireStringLength(test, -1, NumberCompareOperator.EQUAL, "Some message");
+            instance.requireLength(test, -1, NumberCompareOperator.EQUAL, "Some message");
         }
         catch (IllegalArgumentException ex) {
-            assertEquals("Negative requireStringLength() length parameter", ex.getMessage());
+            assertEquals("Negative requireLength() length parameter", ex.getMessage());
         }
     }
 
     @Test
-    public void testRequireStringLength_EQUAL_4_4() {
+    public void testRequireLength_EQUAL_4_4() {
         final String test = "0123";
 
-        final StringArgumentValidatorImpl instance = new StringArgumentValidatorImpl();
-        instance.requireStringLength(test, 4, NumberCompareOperator.EQUAL, "Some message");
+        this.testCompare4(test, NumberCompareOperator.EQUAL, false);
     }
 
     @Test
-    public void testRequireStringLength_EQUAL_4_3() {
+    public void testRequireLength_EQUAL_4_3() {
         final String test = "012";
 
-        try {
-            final StringArgumentValidatorImpl instance = new StringArgumentValidatorImpl();
-            instance.requireStringLength(test, 4, NumberCompareOperator.EQUAL, "Some message");
-        }
-        catch (IllegalArgumentException ex) {
-            assertEquals("String length violation (Some message): string(" + test.length() + ") " + NumberCompareOperator.EQUAL.getOperator() + " 4", ex.getMessage());
-        }
+        this.testCompare4(test, NumberCompareOperator.EQUAL, true);
     }
 
     @Test
-    public void testRequireStringLength_EQUAL_4_5() {
+    public void testRequireLength_EQUAL_4_5() {
         final String test = "01234";
 
-        try {
-            final StringArgumentValidatorImpl instance = new StringArgumentValidatorImpl();
-            instance.requireStringLength(test, 4, NumberCompareOperator.EQUAL, "Some message");
-        }
-        catch (IllegalArgumentException ex) {
-            assertEquals("String length violation (Some message): string(" + test.length() + ") " + NumberCompareOperator.EQUAL.getOperator() + " 4", ex.getMessage());
-        }
+        this.testCompare4(test, NumberCompareOperator.EQUAL, true);
     }
 
     @Test
-    public void testRequireStringLength_GREATER_4_5() {
+    public void testRequireLength_GREATER_4_5() {
         final String test = "01235";
 
-        final StringArgumentValidatorImpl instance = new StringArgumentValidatorImpl();
-        instance.requireStringLength(test, 4, NumberCompareOperator.GREATER, "Some message");
+        this.testCompare4(test, NumberCompareOperator.GREATER, false);
     }
 
     @Test
-    public void testRequireStringLength_GREATER_4_4() {
+    public void testRequireLength_GREATER_4_4() {
         final String test = "0123";
 
-        try {
-            final StringArgumentValidatorImpl instance = new StringArgumentValidatorImpl();
-            instance.requireStringLength(test, 4, NumberCompareOperator.GREATER, "Some message");
-        }
-        catch (IllegalArgumentException ex) {
-            assertEquals("String length violation (Some message): string(" + test.length() + ") " + NumberCompareOperator.GREATER.getOperator() + " 4", ex.getMessage());
-        }
+        this.testCompare4(test, NumberCompareOperator.GREATER, true);
     }
 
     @Test
-    public void testRequireStringLength_GREATER_4_3() {
+    public void testRequireLength_GREATER_4_3() {
         final String test = "012";
 
-        try {
-            final StringArgumentValidatorImpl instance = new StringArgumentValidatorImpl();
-            instance.requireStringLength(test, 4, NumberCompareOperator.GREATER, "Some message");
-        }
-        catch (IllegalArgumentException ex) {
-            assertEquals("String length violation (Some message): string(" + test.length() + ") " + NumberCompareOperator.GREATER.getOperator() + " 4", ex.getMessage());
-        }
+        this.testCompare4(test, NumberCompareOperator.GREATER, true);
     }
 
     @Test
-    public void testRequireStringLength_GREATER_EQUAL_4_5() {
+    public void testRequireLength_GREATER_EQUAL_4_5() {
         final String test = "01235";
 
-        final StringArgumentValidatorImpl instance = new StringArgumentValidatorImpl();
-        instance.requireStringLength(test, 4, NumberCompareOperator.GREATER_EQUAL, "Some message");
+        this.testCompare4(test, NumberCompareOperator.GREATER_EQUAL, false);
     }
 
     @Test
-    public void testRequireStringLength_GREATER_EQUAL_4_4() {
+    public void testRequireLength_GREATER_EQUAL_4_4() {
         final String test = "0123";
 
-        final StringArgumentValidatorImpl instance = new StringArgumentValidatorImpl();
-        instance.requireStringLength(test, 4, NumberCompareOperator.GREATER_EQUAL, "Some message");
+        this.testCompare4(test, NumberCompareOperator.GREATER_EQUAL, false);
     }
 
     @Test
-    public void testRequireStringLength_GREATER_EQUAL_4_3() {
+    public void testRequireLength_GREATER_EQUAL_4_3() {
         final String test = "012";
 
-        try {
-            final StringArgumentValidatorImpl instance = new StringArgumentValidatorImpl();
-            instance.requireStringLength(test, 4, NumberCompareOperator.GREATER_EQUAL, "Some message");
-        }
-        catch (IllegalArgumentException ex) {
-            assertEquals("String length violation (Some message): string(" + test.length() + ") " + NumberCompareOperator.GREATER_EQUAL.getOperator() + " 4", ex.getMessage());
-        }
+        this.testCompare4(test, NumberCompareOperator.GREATER_EQUAL, true);
     }
 
     @Test
-    public void testRequireStringLength_LESS_4_3() {
+    public void testRequireLength_LESS_4_3() {
         final String test = "012";
 
-        final StringArgumentValidatorImpl instance = new StringArgumentValidatorImpl();
-        instance.requireStringLength(test, 4, NumberCompareOperator.LESS, "Some message");
+        this.testCompare4(test, NumberCompareOperator.LESS, false);
     }
 
     @Test
-    public void testRequireStringLength_LESS_4_4() {
+    public void testRequireLength_LESS_4_4() {
         final String test = "0123";
 
-        try {
-            final StringArgumentValidatorImpl instance = new StringArgumentValidatorImpl();
-            instance.requireStringLength(test, 4, NumberCompareOperator.LESS, "Some message");
-        }
-        catch (IllegalArgumentException ex) {
-            assertEquals("String length violation (Some message): string(" + test.length() + ") " + NumberCompareOperator.LESS.getOperator() + " 4", ex.getMessage());
-        }
+        this.testCompare4(test, NumberCompareOperator.LESS, true);
     }
 
     @Test
-    public void testRequireStringLength_LESS_4_5() {
+    public void testRequireLength_LESS_4_5() {
         final String test = "01234";
 
-        try {
-            final StringArgumentValidatorImpl instance = new StringArgumentValidatorImpl();
-            instance.requireStringLength(test, 4, NumberCompareOperator.LESS, "Some message");
-        }
-        catch (IllegalArgumentException ex) {
-            assertEquals("String length violation (Some message): string(" + test.length() + ") " + NumberCompareOperator.LESS.getOperator() + " 4", ex.getMessage());
-        }
+        this.testCompare4(test, NumberCompareOperator.LESS, true);
     }
 
     @Test
-    public void testRequireStringLength_LESS_EQUAL_4_3() {
+    public void testRequireLength_LESS_EQUAL_4_3() {
         final String test = "012";
 
-        final StringArgumentValidatorImpl instance = new StringArgumentValidatorImpl();
-        instance.requireStringLength(test, 4, NumberCompareOperator.LESS_EQUAL, "Some message");
+        this.testCompare4(test, NumberCompareOperator.LESS_EQUAL, false);
     }
 
     @Test
-    public void testRequireStringLength_LESS_EQUAL_4_4() {
+    public void testRequireLength_LESS_EQUAL_4_4() {
         final String test = "0123";
 
-        final StringArgumentValidatorImpl instance = new StringArgumentValidatorImpl();
-        instance.requireStringLength(test, 4, NumberCompareOperator.LESS_EQUAL, "Some message");
+        this.testCompare4(test, NumberCompareOperator.LESS_EQUAL, false);
     }
 
     @Test
-    public void testRequireStringLength_LESS_EQUAL_4_5() {
+    public void testRequireLength_LESS_EQUAL_4_5() {
         final String test = "01234";
 
+        this.testCompare4(test, NumberCompareOperator.LESS_EQUAL, true);
+    }
+
+    private void testCompare4(final String test, final NumberCompareOperator comp, final boolean doFail) {
         try {
             final StringArgumentValidatorImpl instance = new StringArgumentValidatorImpl();
-            instance.requireStringLength(test, 4, NumberCompareOperator.LESS_EQUAL, "Some message");
+            instance.requireLength(test, 4, comp, "Some message");
+
+            if (doFail) {
+                fail();
+            }
         }
         catch (IllegalArgumentException ex) {
-            assertEquals("String length violation (Some message): string(" + test.length() + ") " + NumberCompareOperator.LESS_EQUAL.getOperator() + " 4", ex.getMessage());
+            assertEquals("String length violation (Some message): string(" + test.length() + ") " + comp.getOperator() + " 4", ex.getMessage());
         }
     }
 }

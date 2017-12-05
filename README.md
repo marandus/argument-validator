@@ -10,7 +10,7 @@ To use this library in your project simply add this to your Maven pom.xml.
 <dependency>
     <groupId>com.github.marandus</groupId>
     <artifactId>argument-validator</artifactId>
-    <version>0.1.1</version>
+    <version>0.2</version>
 </dependency>
 ```
 
@@ -20,7 +20,7 @@ you may build and install it into your local Maven repository by using the follo
 ```bash
 git clone git@github.com:marandus/argument-validator.git
 cd argument-validator
-git checkout argument-validator-0.1.1
+git checkout argument-validator-0.2
 mvn install
 ```
 

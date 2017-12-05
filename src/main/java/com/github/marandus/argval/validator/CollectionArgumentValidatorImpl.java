@@ -15,6 +15,7 @@
  */
 package com.github.marandus.argval.validator;
 
+import com.github.marandus.argval.enums.NumberCompareOperator;
 import java.util.Collection;
 import java.util.Map;
 
@@ -69,6 +70,40 @@ public class CollectionArgumentValidatorImpl implements CollectionArgumentValida
 
         if (arg.isEmpty()) {
             throw new IllegalArgumentException(msg + ": Map is empty");
+        }
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public void requireLength(final Collection<?> arg, final int len, final NumberCompareOperator comp, final String name) {
+        if (len < 0) {
+            throw new IllegalArgumentException("Negative requireLength(Collection<?>) length parameter");
+        }
+
+        this.objArgVal.requireNonNull(arg, "requireLength(Collection<?>) parameter");
+
+        if (!comp.doComparison(arg.size(), len)) {
+            String msg = "Collection size violation (" + name + "): Collection(" + arg.size() + ") " + comp.getOperator() + " " + len;
+            throw new IllegalArgumentException(msg);
+        }
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public void requireLength(final Map<?, ?> arg, final int len, final NumberCompareOperator comp, final String name) {
+        if (len < 0) {
+            throw new IllegalArgumentException("Negative requireLength(Map<?,?>) length parameter");
+        }
+
+        this.objArgVal.requireNonNull(arg, "requireLength(Map<?,?>) parameter");
+
+        if (!comp.doComparison(arg.size(), len)) {
+            String msg = "Map size violation (" + name + "): Map(" + arg.size() + ") " + comp.getOperator() + " " + len;
+            throw new IllegalArgumentException(msg);
         }
     }
 }

@@ -18,6 +18,8 @@ package com.github.marandus.argval;
 import com.github.marandus.argval.enums.NumberCompareOperator;
 import com.github.marandus.argval.validator.CollectionArgumentValidator;
 import com.github.marandus.argval.validator.CollectionArgumentValidatorImpl;
+import com.github.marandus.argval.validator.NumberArgumentValidator;
+import com.github.marandus.argval.validator.NumberArgumentValidatorImpl;
 import com.github.marandus.argval.validator.ObjectArgumentValidator;
 import com.github.marandus.argval.validator.ObjectArgumentValidatorImpl;
 import com.github.marandus.argval.validator.StringArgumentValidator;
@@ -34,9 +36,10 @@ import java.util.Map;
  * @author Thomas Rix (thomasrix@exodus-project.net)
  * @since 0.1
  */
-public class ArgumentValidatorBean implements CollectionArgumentValidator, ObjectArgumentValidator, StringArgumentValidator {
+public class ArgumentValidatorBean implements CollectionArgumentValidator, NumberArgumentValidator, ObjectArgumentValidator, StringArgumentValidator {
 
     private final CollectionArgumentValidator collArgVal;
+    private final NumberArgumentValidator numArgVal;
     private final ObjectArgumentValidator objArgVal;
     private final StringArgumentValidator stringArgVal;
 
@@ -50,7 +53,7 @@ public class ArgumentValidatorBean implements CollectionArgumentValidator, Objec
      * @see StringArgumentValidatorImpl
      */
     public ArgumentValidatorBean() {
-        this(new CollectionArgumentValidatorImpl(), new ObjectArgumentValidatorImpl(), new StringArgumentValidatorImpl());
+        this(new CollectionArgumentValidatorImpl(), new NumberArgumentValidatorImpl(), new ObjectArgumentValidatorImpl(), new StringArgumentValidatorImpl());
     }
 
     /**
@@ -59,11 +62,13 @@ public class ArgumentValidatorBean implements CollectionArgumentValidator, Objec
      * {@link StringArgumentValidator}.
      *
      * @param collArgVal Custom implementation of collection validator
+     * @param numArgVal Custom implementation of number validator
      * @param objArgVal Custom implementation of object validator
      * @param stringArgVal Custom implementation of string validator
      */
-    public ArgumentValidatorBean(final CollectionArgumentValidator collArgVal, final ObjectArgumentValidator objArgVal, final StringArgumentValidator stringArgVal) {
+    public ArgumentValidatorBean(final CollectionArgumentValidator collArgVal, final NumberArgumentValidator numArgVal, final ObjectArgumentValidator objArgVal, final StringArgumentValidator stringArgVal) {
         this.collArgVal = collArgVal;
+        this.numArgVal = numArgVal;
         this.objArgVal = objArgVal;
         this.stringArgVal = stringArgVal;
     }
@@ -72,7 +77,7 @@ public class ArgumentValidatorBean implements CollectionArgumentValidator, Objec
      * {@inheritDoc }
      */
     @Override
-    public void requireNonBlank(String arg, String msg) {
+    public void requireNonBlank(final String arg, final String msg) {
         this.stringArgVal.requireNonBlank(arg, msg);
     }
 
@@ -80,15 +85,15 @@ public class ArgumentValidatorBean implements CollectionArgumentValidator, Objec
      * {@inheritDoc }
      */
     @Override
-    public void requireStringLength(String arg, int len, NumberCompareOperator comp, String name) {
-        this.stringArgVal.requireStringLength(arg, len, comp, name);
+    public void requireLength(final String arg, final int len, final NumberCompareOperator comp, final String name) {
+        this.stringArgVal.requireLength(arg, len, comp, name);
     }
 
     /**
      * {@inheritDoc }
      */
     @Override
-    public void requireNonNull(Object arg, String msg) {
+    public void requireNonNull(final Object arg, final String msg) {
         this.objArgVal.requireNonNull(arg, msg);
     }
 
@@ -96,7 +101,7 @@ public class ArgumentValidatorBean implements CollectionArgumentValidator, Objec
      * {@inheritDoc }
      */
     @Override
-    public void requireNonEmpty(Collection<?> arg, String msg) {
+    public void requireNonEmpty(final Collection<?> arg, final String msg) {
         this.collArgVal.requireNonEmpty(arg, msg);
     }
 
@@ -104,7 +109,79 @@ public class ArgumentValidatorBean implements CollectionArgumentValidator, Objec
      * {@inheritDoc }
      */
     @Override
-    public void requireNonEmpty(Map<?, ?> arg, String msg) {
+    public void requireNonEmpty(final Map<?, ?> arg, final String msg) {
         this.collArgVal.requireNonEmpty(arg, msg);
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public void requireLength(final Collection<?> arg, final int len, final NumberCompareOperator comp, final String name) {
+        this.collArgVal.requireLength(arg, len, comp, name);
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public void requireLength(final Map<?, ?> arg, final int len, final NumberCompareOperator comp, final String name) {
+        this.collArgVal.requireLength(arg, len, comp, name);
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public void requireValue(final byte arg, final byte value, final NumberCompareOperator comp, final String name) {
+        this.numArgVal.requireValue(arg, value, comp, name);
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public void requireValue(final short arg, final short value, final NumberCompareOperator comp, final String name) {
+        this.numArgVal.requireValue(arg, value, comp, name);
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public void requireValue(final int arg, final int value, final NumberCompareOperator comp, final String name) {
+        this.numArgVal.requireValue(arg, value, comp, name);
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public void requireValue(final long arg, final long value, final NumberCompareOperator comp, final String name) {
+        this.numArgVal.requireValue(arg, value, comp, name);
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public void requireNegative(long arg, String name) {
+        this.numArgVal.requireNegative(arg, name);
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public void requirePositive(long arg, String name) {
+        this.numArgVal.requirePositive(arg, name);
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public void requireZero(long arg, String name) {
+        this.numArgVal.requireZero(arg, name);
     }
 }

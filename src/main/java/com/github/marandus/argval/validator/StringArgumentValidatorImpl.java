@@ -64,39 +64,17 @@ public class StringArgumentValidatorImpl implements StringArgumentValidator {
      * {@inheritDoc }
      */
     @Override
-    public void requireStringLength(final String arg, final int len, final NumberCompareOperator comp, final String name) {
+    public void requireLength(final String arg, final int len, final NumberCompareOperator comp, final String name) {
         if(len < 0) {
-            throw new IllegalArgumentException("Negative requireStringLength() length parameter");
+            throw new IllegalArgumentException("Negative requireLength() length parameter");
         }
 
         if(len == 0 && comp == NumberCompareOperator.EQUAL) {
-            log.warn("Called requireStringLength() with length=0 and operator=EQUAL. You should use requireNonBlank() instead.");
+            log.warn("Called requireLength() with length=0 and operator=EQUAL. You should use requireNonBlank() instead.");
         }
-        this.objArgVal.requireNonNull(arg, "requireStringLength() parameter");
+        this.objArgVal.requireNonNull(arg, "requireLength() parameter");
 
-        final boolean result;
-
-        switch (comp) {
-            case EQUAL:
-                result = (arg.length() == len);
-                break;
-            case GREATER:
-                result = (arg.length() > len);
-                break;
-            case GREATER_EQUAL:
-                result = (arg.length() >= len);
-                break;
-            case LESS:
-                result = (arg.length() < len);
-                break;
-            case LESS_EQUAL:
-                result = (arg.length() <= len);
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown value of NumberCompare: " + comp);
-        }
-
-        if (!result) {
+        if (!comp.doComparison(arg.length(), len)) {
             String msg = "String length violation (" + name + "): string(" + arg.length() + ") " + comp.getOperator() + " " + len;
             throw new IllegalArgumentException(msg);
         }

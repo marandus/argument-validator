@@ -37,13 +37,15 @@ public interface StringArgumentValidator {
      * @param msg Message used to construct the exception message
      *
      * @throws IllegalArgumentException if specified argument is blank
+     *
+     * @since 0.1
      */
     public void requireNonBlank(final String arg, final String msg);
 
     /**
-     * Test the length {@code arg} against the provided length using the specified compare operator.
-     * If the result of the comparison is false, an IllegalArgumentException will be raised. The
-     * exception message will be constructed as follows:
+     * Test the length of {@code arg} against the provided length using the specified compare
+     * operator. If the result of the comparison is false, an IllegalArgumentException will be
+     * raised. The exception message will be constructed as follows:
      * <p>
      * <tt>"String length violation (" + name + "): string(" + arg.length() + ") " +
      * comp.getOperator() + " " + len</tt>
@@ -54,6 +56,8 @@ public interface StringArgumentValidator {
      * @param name Name to be referenced in exception message
      *
      * @throws IllegalArgumentException if specified argument does not match length requirements
+     *
+     * @since 0.1
      */
-    public void requireStringLength(final String arg, final int len, final NumberCompareOperator comp, final String name);
+    public void requireLength(final String arg, final int len, final NumberCompareOperator comp, final String name);
 }
